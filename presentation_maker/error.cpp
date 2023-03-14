@@ -1,6 +1,6 @@
 #include "error.h"
 
-#include "../include/SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #include <iostream>
 #include <stdexcept>
 
@@ -12,6 +12,6 @@
 void Error::log_Critical(std::string const&& app_msg)
 {
     std::string errmsg { app_msg + "\n" + SDL_GetError() };
-    SDL_LogCritical(0, errmsg.c_str());
+    SDL_LogCritical(0, "%s", errmsg.c_str());
     throw std::runtime_error(errmsg);
 }

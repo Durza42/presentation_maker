@@ -13,6 +13,8 @@ Context::Context()
         800, 600,
         SDL_WINDOW_SHOWN
     );
-    if(!Window)
+//    if(!Window)
         Error::log_Critical("error initializing SDL_Window");
+
+    SDL_Delay(1000);
 }

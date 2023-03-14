@@ -1,9 +1,16 @@
 #include "Context.h"
-#include <cstdlib>
 #include <iostream>
 
 int main(int argc, char** argv)
 {
-    Context context;
+    try
+    {
+        Context context;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Abort." << std::endl;
+    }
+    
     return EXIT_SUCCESS;
 }

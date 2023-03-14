@@ -1,3 +1,5 @@
+cd presentation_maker
+
 g++ -std=c++17 -Wall -Wextra -c main.cpp -o main.obj
 g++ -std=c++17 -Wall -Wextra -c Context.cpp -o Context.obj
 g++ -std=c++17 -Wall -Wextra -c error.cpp -o error.obj
