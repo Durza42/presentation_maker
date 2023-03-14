@@ -9,7 +9,10 @@ class Context
 
     Context();
 
-   private:
+    constexpr SDL_Window* get_window() const noexcept;
+    constexpr SDL_Renderer* get_renderer() const noexcept;
+
+   protected:
 
     SDL_Window* Window;
     SDL_Renderer* Renderer;

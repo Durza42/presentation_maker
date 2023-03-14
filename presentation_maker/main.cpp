@@ -1,16 +1,10 @@
-#include "Context.h"
+#include "Game.h"
 #include <iostream>
 
 int main(int argc, char** argv)
 {
-    try
-    {
-        Context context;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << "Abort." << std::endl;
-    }
-    
+    Game game;
+    game.main_loop();
+
     return EXIT_SUCCESS;
 }
