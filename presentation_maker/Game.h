@@ -1,7 +1,11 @@
 #include <SDL2/SDL.h>
 
 #include "Context.h"
+#include "Diapo.h"
 
+/**
+ * @brief main class; manage window refresh, events, etc.
+ */
 class Game : public Context
 {
    public:
@@ -11,4 +15,5 @@ class Game : public Context
 
    private:
 
+    Diapo m_diapo;
 };

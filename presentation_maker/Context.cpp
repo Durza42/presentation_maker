@@ -1,16 +1,28 @@
 #include "Context.h"
 #include "error.h"
 #include <iostream>
+#include <SDL2/SDL_image.h>
 
-Context::Context()
+/**
+ * @brief Construct a new Context::Context object; Initialize SDL2, create window and renderer.
+ * @param title the title of the window.
+ * @param w the weigth of the window.
+ * @param h the heigth og the window.
+ * @exception if an initialization fails, log related error message with Error::log_Critical; this throw a std::runtime_error exception.
+ * @note renderer will be created as SDL_RENDERER_TARGETTEXTURE.
+ */
+Context::Context(const std::string&& title, const int&& w, const int&& h)
 {
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
-        Error::log_Critical("error initializing SDL.");
+        Error::log_Critical("error initializing SDL2.");
+
+    if(IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) <= 0)
+        Error::log_Critical("error initializing SDL2_image.");
 
     Window = SDL_CreateWindow(
-        "presentation maker",
+        title.c_str(),
         0, 0,
-        800, 600,
+        w, h,
         SDL_WINDOW_SHOWN
     );
     if(!Window)
@@ -25,11 +37,19 @@ Context::Context()
         Error::log_Critical("error initializing SDL_Renderer.");
 }
 
+/**
+ * @brief returns the window object
+ * @return constexpr SDL_Window* 
+ */
 constexpr SDL_Window* Context::get_window() const noexcept
 {
     return Window;
 }
 
+/**
+ * @brief returns the renderer object
+ * @return constexpr SDL_Renderer* 
+ */
 constexpr SDL_Renderer* Context::get_renderer() const noexcept
 {
     return Renderer;
