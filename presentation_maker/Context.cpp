@@ -36,21 +36,3 @@ Context::Context(const std::string&& title, const int&& w, const int&& h)
     if(!Renderer)
         Error::log_Critical("error initializing SDL_Renderer.");
 }
-
-/**
- * @brief returns the window object
- * @return constexpr SDL_Window* 
- */
-constexpr SDL_Window* Context::get_window() const noexcept
-{
-    return Window;
-}
-
-/**
- * @brief returns the renderer object
- * @return constexpr SDL_Renderer* 
- */
-constexpr SDL_Renderer* Context::get_renderer() const noexcept
-{
-    return Renderer;
-}

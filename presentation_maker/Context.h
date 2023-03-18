@@ -15,8 +15,23 @@ class Context
 
     Context(const std::string&& title=WINDOW_TITLE, const int&& w=WINDOW_W, const int&& h=WINDOW_H);
 
-    constexpr SDL_Window* get_window() const noexcept;
-    constexpr SDL_Renderer* get_renderer() const noexcept;
+    /**
+     * @brief returns the window object
+     * @return constexpr SDL_Window* 
+     */
+    constexpr SDL_Window* get_window() const noexcept
+    {
+        return Window;
+    }
+
+    /**
+     * @brief returns the renderer object
+     * @return constexpr SDL_Renderer* 
+     */
+    constexpr SDL_Renderer* get_renderer() const noexcept
+    {
+        return Renderer;
+    }
 
    protected:
 

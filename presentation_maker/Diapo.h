@@ -19,5 +19,6 @@ class Diapo
 
    private:
 
+    /// @brief all the slides of the presentation, in presentation order
     std::vector<Slide> m_slides;
 };

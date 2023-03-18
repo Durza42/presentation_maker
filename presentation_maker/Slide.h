@@ -18,5 +18,6 @@ class Slide
 
    private:
 
+    /// @brief the image of this slide
     SDL_Texture* m_image = nullptr;
 };

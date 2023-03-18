@@ -33,8 +33,9 @@ void Diapo::load(SDL_Renderer* Renderer, std::string const& image_path)
 }
 
 /**
- * @brief Start at first diapo
+ * @brief Start and show the first diapo
  * @details Shows the first diapo, and then launch the rest of the diapo
+ * @param Renderer the renderer of the associated window
  */
 void Diapo::start(SDL_Renderer* Renderer)
 {
