@@ -1,0 +1,11 @@
+2 ~~ nbr of diapos
+> ~~ first diapo
+    boom.jpg ~~ image of the first diapo: path
+    full ~~ position and dimentions of the image on the window; full: equals window's size
+    full ~~ position of the source rect: the part of the image to be shown; full: the entire image
+    0 0 0 ~~ background color: R G B (will not be show as the image is said 'full')
+> ~~ second diapo
+    boom.jpg ~~ image of the first diapo: path
+    +100 +100 -100 -100 ~~ only show the part of the image from xLeftBorder + 50 to xRightBorder - 50 (and same for Y)
+    full ~~ position and dimentions of the image on the window; full: equals window's size
+    75 100 25 ~~ background color: R G B

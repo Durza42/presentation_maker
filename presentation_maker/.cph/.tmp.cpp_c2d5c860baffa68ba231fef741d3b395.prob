@@ -1,0 +1,1 @@
+{"name":"Local: tmp","url":"/home/durza42/Documents/jeux/presentation_maker/presentation_maker/tmp.cpp","tests":[{"id":1679789912366,"input":"hello_world/.params2","output":"blablabla"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/durza42/Documents/jeux/presentation_maker/presentation_maker/tmp.cpp","group":"local","local":true}
