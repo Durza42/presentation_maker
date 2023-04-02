@@ -2,6 +2,7 @@
 
 #include <string>
 #include "error.h"
+#include "converts.h"
 
 
 /**
@@ -18,9 +19,13 @@ Slide::Slide()
  * @brief Construct a new Slide::Slide object with the given image and renderer
  * @exception std::runtime_error exception will be thrown if the image_path is not correct.
  */
-Slide::Slide(SDL_Renderer* Renderer, std::string const& image_path)
+Slide::Slide(SDL_Renderer* Renderer, Slide_info info) :
+       src_is_set { info.src_is_set },
+       src { info.src },
+       dest_is_set { info.dest_is_set },
+       dest { info.dest }
 {
-    load(Renderer, image_path);
+    load(Renderer, info.img_name);
 }
 
 /**
@@ -45,10 +50,18 @@ void Slide::load(SDL_Renderer* Renderer, std::string const& image_path)
  * @param Renderer the targeted SDL_Renderer
  * @note if the slide has not be associated to an image, a warning will be printed using Error::log_Warning
  */
-void Slide::show(SDL_Renderer* Renderer) noexcept
+void Slide::show(SDL_Renderer* Renderer)
 {
-    if(m_image != nullptr)
-        SDL_RenderCopy(Renderer, m_image, nullptr, nullptr);
+    if(m_image == nullptr)
+        // exits the function throwing exception
+        Error::log_Error("cannot print nullptr image");
+
+    if(src_is_set and dest_is_set)
+        SDL_RenderCopy(Renderer, m_image, &src, &dest);
+    else if(src_is_set)
+        SDL_RenderCopy(Renderer, m_image, &src, nullptr);
+    else if(dest_is_set)
+        SDL_RenderCopy(Renderer, m_image, nullptr, &dest);
     else
-        Error::log_Warning("cannot print nullptr image");
+        SDL_RenderCopy(Renderer, m_image, nullptr, nullptr);
 }

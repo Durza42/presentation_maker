@@ -9,11 +9,11 @@ Game::Game()
 {
     try
     {
-        m_diapo.load(Renderer, "imgs/boom.jpg");
+        m_diapo.load(Renderer, "hello_world");
     }
     catch(const std::exception& e)
     {
-        std::cerr << "cannot continue; abort" << '\n';
+        std::cerr << e.what() << " | cannot continue; abort" << '\n';
         exit(EXIT_FAILURE);
     }
 }
@@ -42,6 +42,8 @@ void Game::main_loop()
     {
         if(manage_events())
             update_screen();
+
+        SDL_Delay(50);
     }
 }
 
