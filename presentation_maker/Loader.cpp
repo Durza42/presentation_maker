@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Diapo.h"
 #include "Loader.h"
+#include "Loader.hpp"
 #include "Context.h"
 #include "converts.h"
 
@@ -61,32 +62,6 @@ noexcept
     std::string ret;
     for(auto it : vText)
         ret += it + "\n";
-
-    return ret;
-}
-
-/**
- * @brief returns how many diapos the .param file contains (i.e the first number)
- * @warning It will remove the first number from the given string!
- * 
- * @param file a reference to the text of the params file
- * @return [int] the number of diapos
- */
-int Loader::get_nb_diapos(std::string& file)
-noexcept
-{
-    // TODO: might be more efficient...
-
-    std::istringstream ss { file };
-
-    int ret;
-    ss >> ret;
-
-    file.clear();
-    std::string line;
-
-    while(getline(ss, line))
-        file += line + "\n";
 
     return ret;
 }
@@ -183,12 +158,13 @@ Slide_info Loader::load_slide(std::string const& src)
  */
 Diapo_info Loader::load(std::string const& path)
 {
-    Diapo_info ret { 0, {} };
-    auto plain_text = get_file_text(path + "/.params");
+    Diapo_info ret { 0, {}, 0 };
 
+    auto plain_text = get_file_text(path + "/.params");
     plain_text = remove_comments(plain_text);
 
-    ret.nb_diapos = get_nb_diapos(plain_text);
+    ret.transition_time_ms = get_first_entity<int>(plain_text);
+    ret.nb_diapos = get_first_entity<int>(plain_text);
 
     auto diapos = split_in_diapos(plain_text);
 
@@ -203,11 +179,6 @@ Diapo_info Loader::load(std::string const& path)
 
         ret.slides.push_back(new_slide);
     }
-
-    for(auto&& it : ret.slides)
-        std::cout << std::to_string(it.src) << std::endl;
-    std::cout << ret.slides.size() << std::endl;
-    std::cout << ret.nb_diapos << std::endl;
 
     return ret;
 }

@@ -1,4 +1,5 @@
 2 ~~ nbr of diapos
+1000 ~~ time of the transition, in ms
 > ~~ first diapo
     boom.jpg ~~ image of the first diapo: path
     full ~~ position and dimentions of the image on the window; full: equals window's size

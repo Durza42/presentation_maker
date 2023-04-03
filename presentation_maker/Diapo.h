@@ -18,6 +18,9 @@ struct Diapo_info
 
     /// @brief description of all the slides of the presentation, in presentation order
     std::vector<Slide_info> slides;
+
+    /// @brief the time needed by one transition (every transition is the same one), in ms.
+    time_t transition_time_ms;
 };
 
 
@@ -37,6 +40,7 @@ class Diapo
 
     void start(SDL_Renderer* Renderer);
     bool next(SDL_Renderer* Renderer);
+    bool previous(SDL_Renderer* Renderer);
 
    private:
 

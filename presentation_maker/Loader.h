@@ -13,9 +13,6 @@ namespace Loader
     std::string get_file_text(std::string const& path)
     noexcept;
 
-    int get_nb_diapos(std::string& file)
-    noexcept;
-
     std::string remove_comments(std::string const& text)
     noexcept;
 

@@ -62,6 +62,10 @@ bool Game::manage_events()
             exit(EXIT_SUCCESS);
 
         if(m_events.key_is_pressed(SDL_SCANCODE_RIGHT))
+            return m_diapo.next(Renderer);
+
+        if(m_events.key_is_pressed(SDL_SCANCODE_LEFT))
+            return m_diapo.previous(Renderer);
 
         return false;
     }
