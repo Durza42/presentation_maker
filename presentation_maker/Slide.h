@@ -4,9 +4,11 @@
  #include <SDL2/SDL.h>
  #include <SDL2/SDL_image.h>
  #include <string>
+ #include <vector>
+ #include "Transition.h"
 
 /**
- * @brief used to describe a single slide
+ * @brief used to describe one single slide
  * @note it is mainly used returned by a function, because it only store the image's path, instead of the whole image
  */
 struct Slide_info
@@ -36,29 +38,34 @@ struct Slide_info
 class Slide
 {
    public:
+    friend class Transition;
 
     Slide();
     Slide(SDL_Renderer* Renderer, Slide_info info);
 
     void load(SDL_Renderer* Renderer, std::string const& image_path);
 
+    void select(SDL_Rect const& previous_src, SDL_Rect const& previous_dest);
     void show(SDL_Renderer* Renderer);
+
+    /// @brief member used to manage the transition of the current slide.
+    Transition transition_manager;
 
    private:
 
-    /// @brief the image of this slide
+    /// @brief the image of this slide.
     SDL_Texture* m_image = nullptr;
 
-    /// @brief true is this slide has set `src` up, false otherwise
+    /// @brief true is this slide has set `src` up, false otherwise.
     bool src_is_set = false;
 
-    /// @brief the part of the image (`img_name`) which will be shown in the screen
+    /// @brief the part of the image (`img_name`) which will be shown in the screen. 
     SDL_Rect src;
 
-    /// @brief true is this slide has set `dest` up, false otherwise
+    /// @brief true is this slide has set `dest` up, false otherwise.
     bool dest_is_set = false;
 
-    /// @brief the part of the windown which will be filled with the image (`img_name`)
+    /// @brief the part of the window which will be filled with the image (`img_name`).
     SDL_Rect dest;
 };
 

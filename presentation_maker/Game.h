@@ -4,6 +4,13 @@
 #include "Diapo.h"
 #include "Events.h"
 
+
+/// @brief number of frames in one second
+#define REFRESH_RATE (30.)
+
+/// @brief time to wait between two frames
+#define FRAME_INTERVAL (1000. / REFRESH_RATE)
+
 /**
  * @brief main class; manage window refresh, events, etc.
  */

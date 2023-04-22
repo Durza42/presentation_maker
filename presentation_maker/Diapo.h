@@ -1,11 +1,11 @@
 #ifndef _DIAPO_H
  #define _DIAPO_H
 
-#include <SDL2/SDL.h>
-#include <vector>
-#include <string>
+ #include <SDL2/SDL.h>
+ #include <vector>
+ #include <string>
 
-#include "Slide.h"
+ #include "Slide.h"
 
 /**
  * @brief used to describe a Diapo object
@@ -18,9 +18,6 @@ struct Diapo_info
 
     /// @brief description of all the slides of the presentation, in presentation order
     std::vector<Slide_info> slides;
-
-    /// @brief the time needed by one transition (every transition is the same one), in ms.
-    time_t transition_time_ms;
 };
 
 
@@ -42,11 +39,22 @@ class Diapo
     bool next(SDL_Renderer* Renderer);
     bool previous(SDL_Renderer* Renderer);
 
+    constexpr
+    bool is_in_transition()
+    noexcept;
+
+    void continue_slide_change();
+
    private:
 
     /// @brief all the slides of the presentation, in presentation order
     std::vector<Slide> m_slides;
 
+    /// @brief indice of the currently shown slide
     std::vector<Slide>::size_type m_iCurrent_slide;
+
+    /// @brief true if the diapo is changing from a diapo to another
+    bool m_is_in_transition = false;
 };
+
 #endif

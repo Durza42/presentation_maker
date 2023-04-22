@@ -68,7 +68,6 @@ void Diapo::start(SDL_Renderer* Renderer)
     m_slides[m_iCurrent_slide].show(Renderer);
 }
 
-#include <iostream>
 /**
  * @brief pass to the next diapositive and print it into the renderer
  * 
@@ -87,7 +86,8 @@ bool Diapo::next(SDL_Renderer* Renderer)
     if(m_iCurrent_slide + 1 == m_slides.size())
         return false;
 
-TODO: // make animation
+TODO: // make animation (function, like gauss curve)
+    transition_values<10>();
 
     ++m_iCurrent_slide;
     m_slides[m_iCurrent_slide].show(Renderer);
@@ -115,4 +115,27 @@ bool Diapo::previous(SDL_Renderer* Renderer)
     --m_iCurrent_slide;
     m_slides[m_iCurrent_slide].show(Renderer);
     return true;
+}
+
+/**
+ * @brief getter for Diapo::is_in_transition
+ * 
+ * @return true if the diapo is changing slide
+ * @return false if not
+ */
+constexpr
+bool Diapo::is_in_transition()
+noexcept
+{
+    return m_is_in_transition;
+}
+
+/**
+ * @brief continue to change slide. 
+ * 
+ * TODO: PRÉCISER
+ */
+void Diapo::continue_slide_change()
+{
+    m_slides[m_iCurrent_slide].transition_manager.continue_change();
 }

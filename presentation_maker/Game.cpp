@@ -40,10 +40,19 @@ void Game::main_loop()
 
     while(true)
     {
-        if(manage_events())
+        auto next_frame_tick = SDL_GetTicks() + FRAME_INTERVAL;
+        bool must_update_screen = manage_events();
+
+        if(m_diapo.is_in_transition())
+        {
+            m_diapo.continue_slide_change();
+            must_update_screen = true;
+        }
+
+        if(must_update_screen)
             update_screen();
 
-        SDL_Delay(50);
+        SDL_Delay(next_frame_tick - SDL_GetTicks());
     }
 }
 

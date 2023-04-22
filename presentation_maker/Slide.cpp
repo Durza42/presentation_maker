@@ -1,6 +1,5 @@
-#include "Slide.h"
-
 #include <string>
+#include "Slide.h"
 #include "error.h"
 #include "converts.h"
 
@@ -9,7 +8,8 @@
  * @brief Construct a new Slide:: Slide object
  * @warning this constructor let the m_image attribute set to nullptr!
  */
-Slide::Slide()
+Slide::Slide():
+       transition_manager(this)
 {
 
 }
@@ -19,7 +19,7 @@ Slide::Slide()
  * @brief Construct a new Slide::Slide object with the given image and renderer
  * @exception std::runtime_error exception will be thrown if the image_path is not correct.
  */
-Slide::Slide(SDL_Renderer* Renderer, Slide_info info) :
+Slide::Slide(SDL_Renderer* Renderer, Slide_info info):
        src_is_set { info.src_is_set },
        src { info.src },
        dest_is_set { info.dest_is_set },
@@ -43,6 +43,17 @@ void Slide::load(SDL_Renderer* Renderer, std::string const& image_path)
         m_image = nullptr;
         Error::log_Error("error loading " + image_path);
     }
+}
+
+/**
+ * @brief called when this slide is coming over the screen.
+ * 
+ * @param previous_src the src rect of the previous slide. The transition will make a smouth gradient from this rect to the src rect of this slide.
+ * @param previous_dest the dest rect of the previous slide. The transition will make a smouth gradient from this rect to the dest rect of this slide.
+ */
+void Slide::select(SDL_Rect const& previous_src, SDL_Rect const& previous_dest)
+{
+    transition_manager.begin_transition(previous_src, previous_dest);
 }
 
 /**
